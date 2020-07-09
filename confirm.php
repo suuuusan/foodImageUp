@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include("funcs.php");
+
 // 入力した値の検証、加工
 $lid = chkString($_POST["lid"], "ログインID");
 $lpw = chkString($_POST["lpw"], "パスワード");
@@ -13,22 +15,15 @@ $weight = chkString($_POST["weight"], "体重");
 // $bmi = chkString($_POST["bmi"], "BMI"); BMIはphp上で作成するため必要なし
 
 // BMI計算
-$height /= 100;
-$bmi = $weight / ($height * $height);
-$bmi = round($bmi, 2);
-$height *= 100;
+// $height /= 100;
+// $bmi = $weight / ($height * $height);
+// $bmi = round($bmi, 2);
+// $height *= 100;
 
-// 関数化する
-// function bmi_clc()
-// {
-//     $height = chkString($_POST["height"], "身長");
-//     $weight = chkString($_POST["weight"], "体重");
-//     $height /= 100;
-//     $bmi = $weight / ($height * $height);
-//     $bmi = round($bmi, 2);
-//     // $height *= 100;
-// }
-// bmi_clc();
+// BMI計算など関数化しfuncs.phpへ
+
+
+$bmi = bmi_calc($height, $weight);
 
 
 
@@ -145,12 +140,12 @@ function chkString($temp = "", $field, $accept_empty = false)
                     <?php echo $bmi; ?>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>体格</td>
+            <tr>
+                <td>あなたの体格</td>
                 <td>
-                    <?php echo $sql; ?>
+                    <? $figure=bmi_figure($bmi); ?>
                 </td>
-            </tr> -->
+            </tr>
         </table>
         <button type="submit" class="btn btn-primary">入力OK</button>
     </form>

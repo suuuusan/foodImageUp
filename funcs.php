@@ -41,3 +41,32 @@ function db_connect()
     }
     return $pdo;
 }
+
+function bmi_calc($height, $weight)
+{
+    $height /= 100;
+    $bmi = $weight / ($height * $height);
+    $bmi = round($bmi, 1);
+    return $bmi;
+}
+
+function bmi_figure($bmi)
+{
+    switch ($bmi) {
+        case $bmi < 19:
+            print "やせ";
+            break;
+        case $bmi < 22:
+            print "細身";
+            break;
+        case $bmi <= 23.5:
+            print "普通";
+            break;
+        case $bmi <= 26.5:
+            print "筋肉質";
+            break;
+        case $bmi > 26.5:
+            print "太り過ぎ（筋肉過多）";
+            break;
+    }
+}

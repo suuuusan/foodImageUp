@@ -61,11 +61,11 @@
             </tr>
             <tr>
                 <td>身長</td>
-                <td><input type="number" name="height" id="heightInput" size="10" value="000.0" step="0.5">cm</td>
+                <td><input type="number" name="height" size="10" value="000.0" step="0.5">cm</td>
             </tr>
             <tr>
                 <td>体重</td>
-                <td><input type="number" name="weight" id="weightInput" size="10" value="00.0" step="0.1">kg</td>
+                <td><input type="number" name="weight" size="10" value="00.0" step="0.1">kg</td>
             </tr>
         </table>
         <button type="submit" class="btn btn-primary">確認する</button>

@@ -67,7 +67,7 @@ $row = $stmt->fetch();
         <tr>
             <td>メールアドレス</td>
             <td>
-                <?php echo $row['mail']; ?>
+                <?php echo "<a href=mailto:" . $row['mail'] . ">" . $row["mail"] . "</a>"; ?>
             </td>
         </tr>
         <tr>

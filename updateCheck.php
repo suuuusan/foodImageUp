@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('funcs.php');
 
 // 入力した値の検証、加工
 $lid = chkString($_POST["lid"], "ログインID");
@@ -11,11 +12,9 @@ $grade = chkString($_POST["grade"], "学年");
 $height = chkString($_POST["height"], "身長");
 $weight = chkString($_POST["weight"], "体重",);
 
+
 // BMI計算
-$height /= 100;
-$bmi = $weight / ($height * $height);
-$bmi = round($bmi, 2);
-$height *= 100;
+$bmi = bmi_calc($height, $weight);
 
 // 入力値をセッション変数に格納
 // $_SESSION["id"] = $id;
@@ -116,12 +115,12 @@ function chkString($temp = "", $field, $accept_empty = false)
                     <?php echo $bmi; ?>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>体格</td>
+            <tr>
+                <td>あなたの体格</td>
                 <td>
-                    <?php echo $sql; ?>
+                    <? $figure=bmi_figure($bmi); ?>
                 </td>
-            </tr> -->
+            </tr>
         </table>
         <button type="submit" class="btn btn-primary">入力OK</button>
     </form>

@@ -82,6 +82,7 @@ if ($status == false) {
             </tbody>
         </table>
     </div>
+
     <? echo "<a href=idUpdate.php?id=" . $id . ">変更 </a>"  ?>
 
     <button class="btn btn-warning" onclick="location.href='logout.php'">ログアウト</button>
