@@ -14,11 +14,6 @@ $height = chkString($_POST["height"], "身長");
 $weight = chkString($_POST["weight"], "体重");
 // $bmi = chkString($_POST["bmi"], "BMI"); BMIはphp上で作成するため必要なし
 
-// BMI計算
-// $height /= 100;
-// $bmi = $weight / ($height * $height);
-// $bmi = round($bmi, 2);
-// $height *= 100;
 
 // BMI計算など関数化しfuncs.phpへ
 
@@ -37,8 +32,12 @@ $bmi = bmi_calc($height, $weight);
 // WHEN bmi<=24 THEN '普通'
 // WHEN bmi<=26 THEN '筋肉質'
 // else '太り過ぎ（筋肉過多)'
-// END AS 体格 
+// END AS figure 
 // FROM BMI"; //END ASは省略不可とのこと
+
+// // SQL準備&実行
+// $stmt = $pdo->prepare($sql);
+// $res = $stmt->execute();
 
 
 // 入力値をセッション変数に格納
@@ -146,6 +145,7 @@ function chkString($temp = "", $field, $accept_empty = false)
                     <? $figure=bmi_figure($bmi); ?>
                 </td>
             </tr>
+
         </table>
         <button type="submit" class="btn btn-primary">入力OK</button>
     </form>

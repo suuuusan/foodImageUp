@@ -8,7 +8,7 @@ include("funcs.php");
 $pdo  = db_connect();
 
 
-// date登録sql作成
+// data確認sql作成
 $sql = "SELECT * FROM BMI WHERE u_id=:lid AND u_pw=:lpw ";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':lid', $lid);
@@ -38,13 +38,14 @@ if ($_POST["lid"] == "master" && $_POST["lpw"] == "0001") {
     $_SESSION["name"] = $val['name'];
     $_SESSION["sex"] = $val['sex'];
     $_SESSION["id"] = $val['id'];
-
+    $_SESSION["lid"] = $val['lid'];
+    $_SESSION["lpw"] = $val['lpw'];
 
     // 認証オケの時
     header("Location:index.php");
 } else {
     // 該当idがなかった場合
-    header("Location:login.php");
-    // echo $error_message = "*ID、もしくはパスワードが間違っています。<br>もう一度入力して下さい。";
+    echo "<p>ID、もしくはパスワードが間違っています。</p>";
+    echo '<a href="login.php">login</a>';
     exit();
 }

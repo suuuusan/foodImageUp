@@ -28,7 +28,7 @@ include("funcs.php");
 $pdo  = db_connect();
 
 // データの取得 DESCは大きいものから降順に並べる
-$sql = "SELECT * FROM BMI ORDER BY id DESC";
+$sql = "SELECT * FROM BMI LEFT OUTER JOIN food_table ON BMI.id = food_table.id ";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -42,7 +42,8 @@ while ($row = $stmt->fetch()) {
     echo "体重" . $row["weight"] . "kg/";
     echo "BMI" . $row["bmi"] . "/";
     echo "(" . date("Y/m/d H:i", strtotime($row["dt"])) . ")";
-
+    // 画像出力
+    echo "<img src ='{$row["image"]}' height=100px ";
 
     // 変更、削除、詳細表示へのリンク
     echo "<a href=update.php?id=" . $row["id"] . ">変更 </a>";

@@ -10,7 +10,7 @@ $pdo  = db_connect();
 
 $msg = 'こんにちは' . htmlspecialchars($name, \ENT_QUOTES, 'UTF-8') . 'さん';
 
-//変更するデータを取得する
+//表示データを取得する
 $sql = "SELECT * FROM BMI WHERE id = :id";
 
 
@@ -31,6 +31,10 @@ if ($status == false) {
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+$_SESSION["height"] = $record["height"];
+$_SESSION["weight"] = $record["weight"];
+$_SESSION["bmi"] = $record["bmi"];
+
 
 // $_SESSION["sex"] = $record["sex"];
 ?>
@@ -44,21 +48,22 @@ if ($status == false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>更新画面</title>
+    <title>index</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <header style='background-color: gray;'><?= $msg ?></header>
+    <header style='background-color: gray;'><?= $msg ?><br>登録時基本情報</header>
     <div class="container">
         <table class="table table-striped">
+
             <thead>
                 <tr>
-                    <th>ログインID</th>
+                    <!-- <th>ログインID</th>
                     <th>パスワード</th>
                     <th>名前</th>
-                    <th>MAIL</th>
+                    <th>MAIL</th> -->
                     <th>性別</th>
                     <th>学年</th>
                     <th>身長</th>
@@ -68,10 +73,10 @@ if ($status == false) {
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row"><?php echo $record["u_id"]; ?></th>
+                    <!-- <th scope="row"><?php echo $record["u_id"]; ?></th>
                     <td><?php echo $record["u_pw"]; ?> </td>
                     <td><?php echo $record["name"]; ?> </td>
-                    <td> <?php echo $record["mail"]; ?></td>
+                    <td> <?php echo $record["mail"]; ?></td> -->
                     <td> <?php echo $record["sex"]; ?></td>
                     <td><?php echo $record["grade"]; ?></td>
                     <td><?php echo $record["height"]; ?>cm </td>
@@ -83,7 +88,38 @@ if ($status == false) {
         </table>
     </div>
 
-    <? echo "<a href=idUpdate.php?id=" . $id . ">変更 </a>"  ?>
+    <? echo "<a href=idUpdate.php?id=" . $id . ">基本情報を変更する </a>"  ?>
+
+    <h6>食事内容をアップロード</h6>
+    <form action="create_file.php" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <div>
+                メモ<input type="text" name=" memo">
+            </div>
+
+            <div>
+                <input type="file" name="upfile" accept="image/*" capture="camera">
+            </div>
+            <div>
+                <button>submit</button>
+            </div>
+        </fieldset>
+    </form>
+    <!-- <form action="new_weight_register.php" method="POST">
+        <table>
+            <tr>
+                <td>身長</td>
+                <td><input type="number" name="newHeight" size="10" value="000.0" step="0.5">cm</td>
+            </tr>
+            <tr>
+                <td>体重</td>
+                <td><input type="number" name="newWeight" size="10" value="00.0" step="0.1">kg</td>
+            </tr>
+
+        </table>
+        <button type="submit" class="btn btn-primary">確認する</button>
+
+    </form> -->
 
     <button class="btn btn-warning" onclick="location.href='logout.php'">ログアウト</button>
 
